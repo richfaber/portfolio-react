@@ -45,55 +45,10 @@ src/
 └── utils/        # 유틸리티 함수
 ```
 
-## SCSS 설정
+## 문서
 
-```bash
-pnpm add -D sass
-```
-
-`src/resource/styles/` 폴더 구조:
-
-```
-src/resource/styles/
-├── define/               # CSS 미생성 → additionalData로 자동 주입
-│   ├── _variable.scss    # 색상, 폰트, 간격 등 변수
-│   └── _mixin.scss       # 재사용 믹스인
-├── vendor/               # 서드파티 scss → additionalData로 자동 주입
-│   └── _sassy-cubic-bezier.scss
-├── base/                 # CSS 생성 → app.scss에서 @use
-│   ├── _reset.scss       # CSS 초기화
-│   └── _common.scss      # 공통 base 스타일
-├── layout/               # CSS 생성 → app.scss에서 @use
-│   ├── _default.scss
-│   ├── _blank.scss
-│   └── _popup.scss
-└── app.scss              # base, layout @use 취합 → main.tsx에서 import
-```
-
-- `define/`, `vendor/` — `additionalData`로 전역 주입, 모든 scss에서 `@use` 없이 사용 가능
-- `base/`, `layout/` — CSS를 직접 생성하므로 `app.scss`에서만 `@use` (`additionalData`에 넣으면 중복 출력)
-
-`app.scss`를 [src/main.tsx](src/main.tsx)에서 한 번 import:
-
-```tsx
-import '@/resource/styles/app.scss'
-```
-
-`vite.config.ts`에 `additionalData` 추가 — 변수/믹스인을 모든 SCSS 파일에 자동 주입:
-
-```typescript
-css: {
-  preprocessorOptions: {
-    scss: {
-      additionalData: `
-        @use "@/resource/styles/define/variable" as *;
-        @use "@/resource/styles/define/mixin" as *;
-        @use "@/resource/styles/vendor/sassy-cubic-bezier" as *;
-      `
-    }
-  }
-}
-```
+- [경로 Alias 설정](docs/alias.md)
+- [SCSS 설정](docs/scss.md)
 
 ---
 
