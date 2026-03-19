@@ -7,10 +7,12 @@
 | 분류 | 기술 |
 |------|------|
 | Framework | React 19 |
-| Build Tool | Vite |
-| Language | TypeScript |
+| Build Tool | Vite 8 |
+| Language | TypeScript 5.9 |
+| Router | react-router-dom 7 |
 | Package Manager | pnpm |
-| Styling | SCSS (sass) |
+| Styling | SCSS (sass) + CSS Modules |
+| 최적화 | React Compiler (babel-plugin-react-compiler) |
 
 ## 요구사항
 
@@ -23,26 +25,33 @@
 # 의존성 설치
 pnpm install
 
-# 개발 서버 실행
+# 개발 서버 실행 (port 5003)
 pnpm dev
 
 # 프로덕션 빌드
 pnpm build
+
+# 빌드 결과 미리보기
+pnpm preview
+
+# 린트
+pnpm lint
 ```
 
 ## 프로젝트 구조
 
 ```
 src/
-├── component/    # 공통 컴포넌트
-├── layout/       # 레이아웃 컴포넌트
-├── page/         # 페이지 컴포넌트
-├── store/        # 상태 관리
-├── hook/         # 커스텀 훅
-├── resource/     # 정적 리소스
-│   ├── assets/   # 이미지, 폰트 등
-│   └── styles/   # 공통 스타일 (variables, mixins, reset)
-└── util/         # 유틸리티 함수
+├── main.tsx          # 앱 진입점
+├── main.scss         # 전역 base 스타일
+├── App.tsx           # 라우터 구성
+├── layout/           # 레이아웃 컴포넌트 (*.tsx + *.module.scss)
+├── page/             # 페이지 컴포넌트 (lazy import)
+└── resource/
+    └── style/
+        ├── define/   # 변수, 믹스인 (전역 자동 주입)
+        ├── vendor/   # 서드파티 scss (전역 자동 주입)
+        └── base/     # 전역 base CSS (reset, common)
 ```
 
 ## 문서
@@ -57,11 +66,11 @@ src/
 
 ### 인증
 
+- [ ] Protected Route
 - [ ] JWT 토큰 관리 (access + refresh token)
+- [ ] 자동 토큰 갱신 (silent refresh)
 - [ ] OAuth 2.0 (Google, GitHub)
 - [ ] 소셜 로그인
-- [ ] Protected Route
-- [ ] 자동 토큰 갱신 (silent refresh)
 
 ### 컴포넌트
 
