@@ -22,9 +22,11 @@ function App() {
 
             {/* Private Page */}
             <Route element={ <ProtectedRoute /> }>
+
               <Route element={ <DefaultLayout /> }>
                 <Route path="/Home" element={ <Home /> } />
               </Route>
+              
             </Route>
 
             {/* Public Page */}

@@ -3,22 +3,20 @@ import { useLocation, useNavigate } from "react-router-dom"
 import style from "./Login.module.scss"
 
 import { useAuth } from "@/context/AuthContext"
-import { signIn } from "@/lib/auth"
 
 export default function Login() {
 
   const navigate = useNavigate()
   const location = useLocation()
-  const { refresh } = useAuth()
+  const { signIn } = useAuth()
 
-  async function onSubmit(e) {
+  function onSubmit(e) {
 
-    if (e) e.preventDefault()
+    e.preventDefault()
 
     const from = location.state?.from?.pathname || '/'
 
     signIn()
-    refresh()
     navigate(from, { replace: true })
 
   }
