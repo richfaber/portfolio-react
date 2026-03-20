@@ -1,6 +1,8 @@
 import { lazy } from 'react'
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 
+import { AuthProvider } from '@/context/AuthContext'
+
 import ProtectedRoute from '@/layout/ProtectedRoute'
 import DefaultLayout from '@/layout/Default'
 
@@ -13,27 +15,32 @@ function App() {
 
   return (
     <>
-      <BrowserRouter>
-        <Routes>
+      <AuthProvider>
 
-          {/* Private Page */}
-          <Route element={ <ProtectedRoute /> }>
-            <Route element={ <DefaultLayout /> }>
-              <Route path="/Home" element={ <Home /> } />
+        <BrowserRouter>
+          <Routes>
+
+            {/* Private Page */}
+            <Route element={ <ProtectedRoute /> }>
+              <Route element={ <DefaultLayout /> }>
+                <Route path="/Home" element={ <Home /> } />
+              </Route>
             </Route>
-          </Route>
 
-          {/* Public Page */}
-          <Route element={ <DefaultLayout /> }>
+            {/* Public Page */}
+            <Route element={ <DefaultLayout /> }>
 
-            <Route path="/" element={ <Index /> } />
-            <Route path="/Login" element={ <Login /> } />
-            <Route path="/Error" element={ <Error /> } />
-            
-          </Route>
+              <Route path="/" element={ <Index /> } />
+              <Route path="/Login" element={ <Login /> } />
+              <Route path="/Error" element={ <Error /> } />
+              
+            </Route>
 
-        </Routes>
-      </BrowserRouter>
+          </Routes>
+        </BrowserRouter>
+
+      </AuthProvider>
+
     </>
   )
 

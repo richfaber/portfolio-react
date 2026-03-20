@@ -1,25 +1,28 @@
-import { useState } from 'react'
 import { useNavigate, Outlet } from 'react-router-dom'
 import style from "./Default.module.scss"
 
-import useAuth, { signOut } from '@/hook/useAuth'
+import { useAuth } from '@/context/AuthContext'
+import { signOut } from '@/lib/auth'
 
 export default function Default() {
 
-  const { isAuthenticated, isLoading } = useAuth()
-
+  const { isAuthenticated, refresh } = useAuth()
   const navigate = useNavigate()
 
-  async function handleSignOut(e) {
-
-    await signOut()
-    return navigate('/Login')
-
+  function handleSignOut() {
+    signOut()
+    refresh()
+    navigate('/')
   }
 
   return (<>
 
-    <button type="button" onClick={handleSignOut} style={{ display: isAuthenticated ? 'block' : 'none' }}>로그아웃</button>
+    { 
+      isAuthenticated && (
+        <button type="button" onClick={handleSignOut}>로그아웃</button>
+      )
+    }
+
     <div className={style.default}>
       <Outlet />
     </div>

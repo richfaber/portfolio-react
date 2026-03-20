@@ -1,15 +1,10 @@
 import { Navigate, Outlet, useLocation } from 'react-router-dom'
-
-import useAuth from '@/hook/useAuth'
+import { useAuth } from '@/context/AuthContext'
 
 export default function ProtectedRoute() {
   
   const location = useLocation()
-  const { isAuthenticated, isLoading } = useAuth()
-
-  if (isLoading) {
-    return <div>인증 정보 확인 중...</div>; 
-  }
+  const { isAuthenticated } = useAuth()
 
   if (!isAuthenticated) {
     return <Navigate to="/Login" replace state={{ from: location }} />;

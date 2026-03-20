@@ -1,13 +1,15 @@
 import { useLocation, useNavigate } from "react-router-dom"
 
 import style from "./Login.module.scss"
-import { signIn } from "@/hook/useAuth"
+
+import { useAuth } from "@/context/AuthContext"
+import { signIn } from "@/lib/auth"
 
 export default function Login() {
 
   const navigate = useNavigate()
   const location = useLocation()
-
+  const { refresh } = useAuth()
 
   async function onSubmit(e) {
 
@@ -15,8 +17,9 @@ export default function Login() {
 
     const from = location.state?.from?.pathname || '/'
 
-    const result = await signIn()
-    if (result) navigate(from, { replace: true })
+    signIn()
+    refresh()
+    navigate(from, { replace: true })
 
   }
 
