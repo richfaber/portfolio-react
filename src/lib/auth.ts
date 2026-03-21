@@ -60,7 +60,6 @@ export function getRefreshToken() {
   
   return {
     userId: payload.userId,
-    exp: payload.exp
   }
 
 }
