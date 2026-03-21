@@ -69,8 +69,7 @@ src/
 - [X] Protected Route
 - [X] JWT 토큰 관리 (access token)
 - [X] 자동 토큰 갱신 (silent refresh)
-- [ ] OAuth 2.0 (Google, GitHub)
-- [ ] 소셜 로그인
+- [ ] OAuth 2.0 소셜 로그인 (Google, GitHub)
 
 ### 유틸리티
 
