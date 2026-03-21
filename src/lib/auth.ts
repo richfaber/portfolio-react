@@ -20,7 +20,7 @@ export function refreshAccessToken() {
   const refreshToken = getRefreshToken()
   if(!refreshToken) return null
 
-  // @TODO Refresh 토큰을 이용해 통신 후 refresh Token 을 저장한다.
+  // @TODO Refresh 토큰을 이용해 통신 후 access Token 을 갱신한다.
   localStorage.setItem('accessToken', 'eyJhbGciOiJIUzI1NiJ9.eyJ1c2VySWQiOiJhZG1pbiIsInJvbGUiOiJhZG1pbiIsImV4cCI6OTk5OTk5OTk5OX0.mock-signature')
 
   return getToken()
