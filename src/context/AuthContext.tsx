@@ -1,5 +1,5 @@
-import { createContext, useContext, useState } from 'react'
-import { getToken, signIn as authSignIn, signOut as authSignOut } from '@/lib/auth'
+import { createContext, useContext, useEffect, useState } from 'react'
+import { getToken, signIn as authSignIn, signOut as authSignOut, refreshAccessToken } from '@/lib/auth'
 
 interface AuthContextType {
   isAuthenticated: boolean,
@@ -15,7 +15,7 @@ export function AuthProvider({ children }) {
 
   const tokenInfo = getToken()
 
-  const [isAuthenticated, setIsAuthenticated] = useState(() => !!getToken())
+  const [isAuthenticated, setIsAuthenticated] = useState(() => !!tokenInfo)
   const [userId, setUserId] = useState(tokenInfo?.payload.userId ?? null)
   const [role, setRole] = useState(tokenInfo?.payload.role ?? null)
 
@@ -40,6 +40,40 @@ export function AuthProvider({ children }) {
     setIsAuthenticated(false)
 
   }
+
+  useEffect(() => {
+    
+    if(!isAuthenticated) return
+
+    const tokenInfo = getToken()
+    if (!tokenInfo) return
+
+    const remainTime = (tokenInfo.payload.exp * 1000) - Date.now()
+    const refreshTimer = setTimeout(() => {
+
+      const newToken = refreshAccessToken()
+
+      if (newToken) {
+        
+        setUserId(newToken.payload.userId)
+        setRole(newToken.payload.role)
+        setIsAuthenticated(true)
+
+      } else {
+
+        signOut()
+
+      }
+
+    }, remainTime - 30000)
+
+    return () => {
+
+      clearTimeout(refreshTimer)
+
+    }
+
+  }, [isAuthenticated])
 
   return (
     <AuthContext.Provider value={{ isAuthenticated, signIn, signOut, userId, role }}>
