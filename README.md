@@ -67,10 +67,18 @@ src/
 ### 인증
 
 - [X] Protected Route
-- [ ] JWT 토큰 관리 (access + refresh token)
+- [X] JWT 토큰 관리 (access token)
 - [ ] 자동 토큰 갱신 (silent refresh)
 - [ ] OAuth 2.0 (Google, GitHub)
 - [ ] 소셜 로그인
+
+### 유틸리티
+
+- [ ] 커스텀 훅 (`useFetch`, `useDebounce`, `useLocalStorage`)
+- [ ] API 클라이언트 추상화 (axios interceptor)
+- [ ] 에러 바운더리 (Error Boundary)
+- [ ] i18n 다국어 처리
+- [ ] 날짜/시간 포맷 유틸
 
 ### 컴포넌트
 
@@ -82,14 +90,6 @@ src/
 - [ ] Drag & Drop
 - [ ] Form (유효성 검사 포함)
 - [ ] 다크모드 토글
-
-### 유틸리티
-
-- [ ] 커스텀 훅 (`useFetch`, `useDebounce`, `useLocalStorage`)
-- [ ] API 클라이언트 추상화 (axios interceptor)
-- [ ] 에러 바운더리 (Error Boundary)
-- [ ] i18n 다국어 처리
-- [ ] 날짜/시간 포맷 유틸
 
 ### 상태관리
 
