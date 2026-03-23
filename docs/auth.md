@@ -4,8 +4,11 @@
 
 ```
 src/
-├── lib/auth.ts             ← signIn, signOut, getToken, getRefreshToken, refreshAccessToken (localStorage 상호작용)
-└── context/AuthContext.tsx ← AuthProvider, useAuth hook (전역 상태 + 동작)
+├── lib/auth.ts             ← signIn, signOut, signInWithOAuth, getToken, getRefreshToken, refreshAccessToken (localStorage 상호작용)
+├── context/AuthContext.tsx ← AuthProvider, useAuth hook (전역 상태 + 동작)
+└── page/auth/
+    ├── Login.tsx           ← ID/PW 로그인 + OAuth 버튼
+    └── OAuthCallback.tsx   ← OAuth 팝업 콜백 페이지
 ```
 
 ## AuthContext
@@ -19,11 +22,12 @@ src/
 | `role` | string \| null | 사용자 권한 |
 | `signIn()` | () => void | 토큰 저장 + 상태 갱신 |
 | `signOut()` | () => void | 토큰 삭제 + 상태 갱신 |
+| `generateOAuth()` | (platform: string) => void | OAuth 팝업 열기 + 로그인 처리 |
 
 ## 사용법
 
 ```tsx
-const { isAuthenticated, userId, role, signIn, signOut } = useAuth()
+const { isAuthenticated, userId, role, signIn, signOut, generateOAuth } = useAuth()
 ```
 
 - `useAuth()`는 반드시 `AuthProvider` 안에서 사용해야 함
@@ -35,6 +39,11 @@ const { isAuthenticated, userId, role, signIn, signOut } = useAuth()
 Login    → signIn()  → navigate(from)
 Default  → signOut() → navigate('/')
 ProtectedRoute → isAuthenticated 체크
+
+OAuthLogin → generateOAuth('google') → 팝업 열기
+           → OAuthCallback 페이지에서 code 수신
+           → postMessage로 부모 창에 전달
+           → signInWithOAuth(platform, code) → JWT 저장 → 상태 갱신
 ```
 
 ## JWT 토큰 구조
@@ -57,6 +66,34 @@ ProtectedRoute → isAuthenticated 체크
 ```
 
 로그아웃 시 클린업(`clearTimeout`)으로 예약된 타이머 취소.
+
+## OAuth 2.0 소셜 로그인
+
+팝업 방식(Popup Flow) 사용. 현재 Google 지원.
+
+### 흐름
+
+```
+1. generateOAuth('google') 호출 → 구글 로그인 팝업 열기
+2. 사용자 구글 로그인 완료
+3. 구글 → OAuthCallback 페이지로 리다이렉트 (?code=xxx)
+4. OAuthCallback에서 code를 postMessage로 부모 창에 전달 후 팝업 닫기
+5. 부모 창에서 signInWithOAuth(platform, code) 호출 → JWT 저장
+6. 상태 갱신 (isAuthenticated, userId, role)
+```
+
+### 환경변수
+
+| 변수 | 설명 |
+|---|---|
+| `VITE_GOOGLE_CLIENT_ID` | 구글 콘솔에서 발급한 클라이언트 ID |
+| `VITE_GOOGLE_CALLBACK_URI` | 구글 콘솔에 등록한 리다이렉트 URI |
+
+`.env.example` 참고. `client_id`와 `redirect_uri`는 URL에 노출되는 값이므로 보안 민감 정보가 아님. `client_secret`은 백엔드에서만 관리.
+
+### 플랫폼 추가 방법
+
+`generateOAuth()` 내부의 `if (platform == 'google')` 블록과 동일한 패턴으로 URL 생성 블록 추가. 팝업/리스너 로직은 공통으로 재사용됨.
 
 ## lib vs util
 

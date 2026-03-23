@@ -1,11 +1,12 @@
 import { createContext, useContext, useEffect, useState } from 'react'
-import { getToken, signIn as authSignIn, signOut as authSignOut, refreshAccessToken } from '@/lib/auth'
+import { getToken, signIn as authSignIn, signInWithOAuth, signOut as authSignOut, refreshAccessToken } from '@/lib/auth'
 import type { UserPayloadType } from '@/lib/auth'
 
 export interface AuthContextType {
   isAuthenticated: boolean,
   signIn: (payload: { id: string, pw: string }) => Promise<void>,
   signOut: () => void,
+  generateOAuth: (platform: string) => void,
   userId: UserPayloadType['userId'] | null
   role: UserPayloadType['role'] | null
 }
@@ -20,6 +21,55 @@ export function AuthProvider({ children }) {
   })
   const [userId, setUserId] = useState(() => getToken()?.payload.userId ?? null)
   const [role, setRole] = useState(() => getToken()?.payload.role ?? null)
+
+  function generateOAuth(platform) {
+
+    let OAuthUrl
+
+    if ( platform == 'google' ) {
+      
+      const params = new URLSearchParams({
+
+        client_id: import.meta.env.VITE_GOOGLE_CLIENT_ID,
+        redirect_uri: import.meta.env.VITE_GOOGLE_CALLBACK_URI,
+        response_type: 'code',
+        scope: 'openid email profile',
+        prompt: 'select_account' // 항상 동의화면 표시
+        
+      })
+
+      OAuthUrl = `https://accounts.google.com/o/oauth2/v2/auth?${ params }`
+
+    }
+
+    if( !OAuthUrl ) return
+
+    window.open(OAuthUrl, '_blank', 'width=500, height=600')
+    window.addEventListener('message', (e) => {
+
+      // @TODO 도메인 체크로 보안유지 필요
+      // if (!e.origin.match(/localhost/g)) return
+
+      if(e.data.code) {
+
+        signInWithOAuth(platform, e.data.code).then(res => {
+
+          const tokenInfo = getToken()
+          setUserId(tokenInfo?.payload.userId)
+          setRole(tokenInfo?.payload.role)
+          setIsAuthenticated(true)          
+
+        }).catch(err => {
+
+          // 실패 시 처리
+
+        })
+
+      }
+
+    }, { once: true })    
+
+  }
 
   function signIn(payload) {
 
@@ -80,7 +130,7 @@ export function AuthProvider({ children }) {
   }, [isAuthenticated])
 
   return (
-    <AuthContext.Provider value={{ isAuthenticated, signIn, signOut, userId, role }}>
+    <AuthContext.Provider value={{ isAuthenticated, signIn, signOut, generateOAuth, userId, role }}>
       {children}
     </AuthContext.Provider>
   )

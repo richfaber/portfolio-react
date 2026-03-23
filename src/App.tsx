@@ -8,6 +8,8 @@ import './App.scss'
 import ProtectedRoute from '@/layout/ProtectedRoute'
 import DefaultLayout from '@/layout/Default'
 
+import OAuthCallback from './page/auth/OAuthCallback'
+
 const Index = lazy( () => import('@/page/Index') )
 const Home = lazy( () => import('@/page/home/Home') )
 const Login = lazy( () => import('@/page/auth/Login') )
@@ -39,6 +41,8 @@ function App() {
               <Route path="/Error" element={ <Error /> } />
               
             </Route>
+
+            <Route path="/auth/OAuthCallback" element={ <OAuthCallback /> } />
 
           </Routes>
         </BrowserRouter>

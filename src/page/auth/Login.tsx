@@ -9,7 +9,7 @@ export default function Login() {
 
   const navigate = useNavigate()
   const location = useLocation()
-  const { signIn } = useAuth()
+  const { signIn, generateOAuth } = useAuth()
 
   const idRef = useRef(null)
   const pwRef = useRef(null)
@@ -48,6 +48,7 @@ export default function Login() {
     
   }
 
+
   return (
     <>
       <h2>로그인</h2>
@@ -63,10 +64,12 @@ export default function Login() {
           { errorMsg &&
             <p className="errorMsg">{ errorMsg }</p>
           }
-
         </fieldset>
 
       </form>
+
+      <p><button type="button" onClick={ () => generateOAuth('google') }>OAuth 구글</button></p>
+
     </>
   )
 

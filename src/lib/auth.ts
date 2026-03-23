@@ -32,6 +32,29 @@ export function signIn(payload) {
 
 }
 
+export function signInWithOAuth(platform, code) {
+
+  if ( platform !== 'google' ) return Promise.reject('지원하지 않는 플랫폼 입니다.')
+
+  if ( platform == 'google' ) {
+
+    return new Promise((resolve) => {
+
+      //@TODO 백엔드 code 전달 후 JWT 수신
+      alert( code )
+      resolve(true)
+
+    }).then(res => {
+
+      localStorage.setItem('accessToken', MOCK_TOKEN)
+      localStorage.setItem('refreshToken', MOCK_REFRESH_TOKEN)
+      
+    })
+
+  }
+
+}
+
 export function signOut() {
 
   localStorage.removeItem('accessToken')
