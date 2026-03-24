@@ -60,9 +60,9 @@ src/
 
 - [경로 Alias 설정](docs/alias.md)
 - [SCSS 설정](docs/scss.md)
-- [React 한계 및 의사결정](docs/limitations.md)
-- [Error Boundary](docs/error-boundary.md)
 - [API 클라이언트](docs/api-client.md)
+- [Error Boundary](docs/error-boundary.md)
+- [React 한계 및 의사결정](docs/limitations.md)
 
 ---
 

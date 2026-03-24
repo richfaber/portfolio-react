@@ -66,7 +66,7 @@ export function signOut() {
 
 export function refreshAccessToken() {
 
-  const refreshToken = getRefreshToken()
+  const refreshToken = getParsedRefreshToken()
   if(!refreshToken) return null
 
   // @TODO Refresh 토큰을 이용해 통신 후 access Token 을 갱신한다.
@@ -100,7 +100,7 @@ export function getParsedToken(): TokenInfoType | null {
 
 }
 
-export function getRefreshToken() {
+export function getParsedRefreshToken() {
 
   const token = tokenStorage.getRefresh()
 

@@ -4,7 +4,7 @@
 
 ```
 src/
-├── lib/auth.ts             ← signIn, signOut, signInWithOAuth, getRawToken, getParsedToken, getRefreshToken, refreshAccessToken
+├── lib/auth.ts             ← signIn, signOut, signInWithOAuth, getRawToken, getParsedToken, getParsedRefreshToken, refreshAccessToken
 ├── lib/tokenStorage.ts     ← 토큰 저장소 추상화 (기본값: localStorage)
 ├── context/AuthContext.tsx ← AuthProvider, useAuth hook (전역 상태 + 동작)
 └── page/auth/
