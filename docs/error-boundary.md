@@ -6,13 +6,14 @@
 
 ```
 BrowserRouter
-└── Router (Routes)
-    ├── /Error 페이지  ← ErrorBoundary 바깥 (항상 접근 가능)
-    └── BoundaryLayout (ErrorBoundary + Outlet)
-        └── 나머지 페이지들
+└── AuthProvider
+    └── Router (Routes)
+        ├── /Error 페이지  ← ErrorBoundary 바깥 (항상 접근 가능)
+        └── ErrorBoundaryLayer (ErrorBoundary + Outlet)
+            └── 나머지 페이지들
 ```
 
-에러 발생 시 `BoundaryLayout`의 ErrorBoundary가 캐치하고 `/Error` 페이지로 이동합니다.
+에러 발생 시 `ErrorBoundaryLayer`의 ErrorBoundary가 캐치하고 `/Error` 페이지로 이동합니다.
 `/Error` 라우트를 ErrorBoundary 바깥에 둔 이유는, ErrorBoundary가 에러를 캐치하면 하위 `<Routes>`를 언마운트하기 때문입니다.
 
 ## 주요 파일
@@ -20,7 +21,7 @@ BrowserRouter
 | 파일 | 역할 |
 |------|------|
 | `src/component/ErrorBoundary.tsx` | `react-error-boundary` 래퍼 컴포넌트 |
-| `src/router/index.tsx` | `BoundaryLayout`, `DefaultFallback` 정의 |
+| `src/router/index.tsx` | `ErrorBoundaryLayer`, `DefaultFallback` 정의 |
 | `src/page/etc/Error.tsx` | 에러 페이지 (`useLocation`으로 메시지 수신) |
 | `src/page/test/Error.tsx` | Error Boundary 동작 확인용 테스트 페이지 |
 
