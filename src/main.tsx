@@ -5,8 +5,10 @@ import App from './App.tsx'
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
+
     <Suspense fallback={null}>
       <App />
     </Suspense>
-  </StrictMode>,
+
+  </StrictMode>
 )

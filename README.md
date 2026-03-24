@@ -75,7 +75,7 @@ src/
 
 - [ ] 커스텀 훅 (`useFetch`, `useDebounce`, `useLocalStorage`)
 - [ ] API 클라이언트 추상화 (axios interceptor)
-- [ ] 에러 바운더리 (Error Boundary)
+- [X] 에러 바운더리 (Error Boundary)
 - [ ] i18n 다국어 처리
 - [ ] 날짜/시간 포맷 유틸
 
