@@ -39,6 +39,12 @@ export default defineConfig({
   build: {
     rollupOptions: {
       output: {
+        manualChunks: (id) => {
+          if (id.includes('node_modules') || id.includes('src/vendor')) {
+            if (['node_modules/react/', 'node_modules/react-dom/', 'node_modules/react-router-dom/', 'node_modules/react-router/'].some(pkg => id.includes(pkg))) return 'vendor'
+            return 'plugin'
+          }
+        },
         chunkFileNames: 'js/[name]-[hash].js',
         entryFileNames: 'js/[name]-[hash].js',
         assetFileNames: (assetInfo) => {
