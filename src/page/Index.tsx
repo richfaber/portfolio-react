@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom'
 
-import style from "./Index.module.scss"
+// import style from "./Index.module.scss"
 
 
 export default function Index() {

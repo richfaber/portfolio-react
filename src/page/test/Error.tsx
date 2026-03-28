@@ -1,7 +1,8 @@
 import { useState } from 'react'
 import { useErrorBoundary, ErrorBoundary } from 'react-error-boundary'
 
-function BrokenComponent() {
+// 강제발생 예제로 never 타입추가
+function BrokenComponent():never {
   throw new Error('라우트 에러 바운드리 에서 캡춰, 렌더링중 에러 발생')
 }
 
