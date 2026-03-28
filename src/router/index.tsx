@@ -17,6 +17,8 @@ const TestError = lazy( () => import('@/page/test/Error') )
 const I18n = lazy( () => import('@/page/test/I18n') )
 const I18nReact = lazy( () => import('@/page/test/I18nReact') )
 
+const ButtonPage = lazy( () => import('@/page/test/ButtonPage') )
+
 function DefaultFallback({ error }) {
 
   const navigate = useNavigate()
@@ -68,6 +70,7 @@ export default function Router() {
             <Route path="Error" element={ <TestError /> } />
             <Route path="I18n" element={ <I18n /> } />
             <Route path="I18nReact" element={ <I18nReact /> } />
+            <Route path="Button" element={ <ButtonPage /> } />
             
           </Route>
         </Route>
