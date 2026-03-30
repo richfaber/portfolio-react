@@ -20,6 +20,7 @@ const I18nReact = lazy( () => import('@/page/test/I18nReact') )
 const ButtonPage = lazy( () => import('@/page/test/ButtonPage') )
 
 const Zustand = lazy( () => import('@/page/test/Zustand') )
+const TanStack = lazy( () => import('@/page/test/TanStack') )
 
 
 function DefaultFallback({ error }) {
@@ -59,9 +60,11 @@ export default function Router() {
 
         {/* Private Page */}
         <Route element={ <ProtectedRoute /> }>
+
           <Route element={ <DefaultLayout /> }>
             <Route path="/Home" element={ <Home /> } />
           </Route>
+
         </Route>
 
         {/* Public Page */}
@@ -76,6 +79,7 @@ export default function Router() {
             <Route path="Button" element={ <ButtonPage /> } />
 
             <Route path="Zustand" element={ <Zustand /> } />
+            <Route path="TanStack" element={ <TanStack /> } />
             
           </Route>
         </Route>

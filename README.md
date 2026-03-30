@@ -80,7 +80,7 @@ src/
 
 ### 유틸리티
 
-- [ ] API 클라이언트 추상화 (fetch, axios, React Query/TanStack Query)
+- [X] API 클라이언트 추상화 (fetch, axios)
 - [X] 에러 바운더리
 - [X] i18n 다국어 처리 (Context)
 - [X] i18n 다국어 처리 (react-i18next)
@@ -101,7 +101,13 @@ src/
 
 ### 상태관리
 
+#### 클라이언트 상태
+
 - [X] Zustand
+
+#### 서버 상태
+
+- [X] React Query / TanStack Query
 
 ### 성능 최적화
 
