@@ -82,7 +82,7 @@ src/
 
 - [ ] 커스텀 훅 (`useFetch`, `useDebounce`, `useLocalStorage`)
 - [X] API 클라이언트 추상화 (fetch, axios)
-- [X] 에러 바운더리 (Error Boundary)
+- [X] 에러 바운더리
 - [X] i18n 다국어 처리 (Context)
 - [X] i18n 다국어 처리 (react-i18next)
 - [ ] 날짜/시간 포맷 유틸
@@ -101,7 +101,7 @@ src/
 
 ### 상태관리
 
-- [ ] Zustand
+- [X] Zustand
 - [ ] React Query / TanStack Query
 - [ ] Context API
 
