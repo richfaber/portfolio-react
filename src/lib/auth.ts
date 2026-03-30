@@ -3,13 +3,13 @@ import { tokenStorage } from '@/lib/tokenStorage'
 const MOCK_TOKEN = 'eyJhbGciOiJIUzI1NiJ9.eyJ1c2VySWQiOiJhZG1pbiIsInJvbGUiOiJhZG1pbiIsImV4cCI6OTk5OTk5OTk5OX0.mock-signature'
 const MOCK_REFRESH_TOKEN = 'eyJhbGciOiJIUzI1NiJ9.eyJ1c2VySWQiOiJhZG1pbiIsInJvbGUiOiJhZG1pbiIsImV4cCI6OTk5OTk5OTk5OTk5fQ.mock-refresh-signature'
 
-export interface UserPayloadType {
+export type UserPayloadType = {
   userId: string
   role: string
   exp: number
 }
 
-export interface TokenInfoType {
+export type TokenInfoType = {
   header: object
   payload: UserPayloadType
   signature: string

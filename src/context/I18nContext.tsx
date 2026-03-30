@@ -1,7 +1,7 @@
 import i18next from '@/i18n'
 import { createContext, useContext, useState } from 'react'
 
-export interface I18nContextType {
+export type I18nContextType = {
   locale: string,
   setLocale: (lang:string) => void
   t: (key: string, options?: object) => string

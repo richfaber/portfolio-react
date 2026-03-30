@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom'
 import { getParsedToken, signIn as authSignIn, signInWithOAuth, signOut as authSignOut, refreshAccessToken } from '@/lib/auth'
 import type { UserPayloadType } from '@/lib/auth'
 
-export interface AuthContextType {
+export type AuthContextType = {
   isAuthenticated: boolean,
   signIn: (payload: { id: string, pw: string }) => Promise<void>,
   signOut: () => void,
