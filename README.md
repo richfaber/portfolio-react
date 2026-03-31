@@ -12,7 +12,7 @@
 | Router | react-router-dom 7 |
 | Package Manager | pnpm |
 | Styling | SCSS (sass) + CSS Modules |
-| 최적화 | React Compiler (babel-plugin-react-compiler) |
+| Compiler | React Compiler (babel-plugin-react-compiler) |
 | i18n | i18next + react-i18next |
 
 ## 요구사항
@@ -51,7 +51,10 @@ src/
 ├── component/        # 공통 컴포넌트
 ├── layout/           # 레이아웃 컴포넌트 (*.tsx + *.module.scss)
 ├── page/             # 페이지 컴포넌트 (lazy import)
+├── lib/              # 유틸리티 함수
+├── store/            # 전역 상태 (Zustand)
 └── resource/
+    ├── image/        # 이미지 리소스
     └── style/
         ├── define/   # 변수, 믹스인 (전역 자동 주입)
         ├── vendor/   # 서드파티 scss (전역 자동 주입)
