@@ -4,7 +4,7 @@ import { useState } from 'react'
 export default function TanStack() {
 
   const [read, setRead] = useState(false)
-  const { data, isLoading, error } = useQuery({
+  const { data, isLoading } = useQuery({
     queryKey: ['todos'],
     queryFn() {
       return fetch('https://jsonplaceholder.typicode.com/todos').then(res => res.json())
@@ -17,7 +17,7 @@ export default function TanStack() {
 
   const postMutation = useMutation({
 
-    mutationFn(data) {
+    mutationFn(data: { title: string; completed: boolean }) {
 
       return fetch('https://jsonplaceholder.typicode.com/todos', {
         method: 'POST',
@@ -30,7 +30,7 @@ export default function TanStack() {
 
   const patchMutation = useMutation({
 
-    mutationFn({ id, ...data }) {
+    mutationFn({ id, ...data }: { id: number; title: string; }) {
 
       return fetch(`https://jsonplaceholder.typicode.com/todos/${id}`, {
         method: 'PATCH',
@@ -43,7 +43,7 @@ export default function TanStack() {
 
   const deleteMutation = useMutation({
 
-    mutationFn(id) {
+    mutationFn(id: number) {
 
       return fetch(`https://jsonplaceholder.typicode.com/todos/${id}`, {
         method: 'DELETE'
