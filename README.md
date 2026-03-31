@@ -113,7 +113,7 @@ src/
 - [X] Code Splitting / Lazy Loading
 - [X] 이미지 최적화
 - [X] Memoization
-- [ ] Web Vitals 측정
+- [X] 번들 분석기 visualizer
 
 ### 기타
 

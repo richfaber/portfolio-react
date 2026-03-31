@@ -1,9 +1,12 @@
-import { defineConfig } from 'vite'
 import path from 'path'
 
 import react, { reactCompilerPreset } from '@vitejs/plugin-react'
-import babel from '@rolldown/plugin-babel'
+
+import { defineConfig } from 'vite'
 import { ViteImageOptimizer } from 'vite-plugin-image-optimizer'
+
+import { visualizer } from 'rollup-plugin-visualizer'
+import babel from '@rolldown/plugin-babel'
 
 export default defineConfig({
   plugins: [
@@ -27,7 +30,8 @@ export default defineConfig({
         ]
       },
       webp: { quality: 80 },
-    })
+    }),
+    visualizer({ open: false, filename: 'public/stats.html' })
   ],
 
   resolve: {

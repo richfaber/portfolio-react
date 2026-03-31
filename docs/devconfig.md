@@ -123,6 +123,32 @@ plugins: [
 
 ---
 
+## 번들 분석 (선택)
+
+`rollup-plugin-visualizer` 로 빌드 후 번들 구성을 시각적으로 확인할 수 있습니다.
+라이브러리 추가 시 번들 크기 영향을 확인할 때 유용합니다.
+
+> dev 서버는 번들링을 하지 않아 실시간 분석은 불가능합니다. 빌드 시에만 생성됩니다.
+
+```ts
+// vite.config.ts
+import { visualizer } from 'rollup-plugin-visualizer'
+
+plugins: [
+  ...
+  visualizer({ open: false, filename: 'public/stats.html' })
+]
+```
+
+빌드 후 `http://localhost:5003/stats.html` 에서 확인:
+
+```bash
+pnpm build
+pnpm preview
+```
+
+---
+
 ## Web Vitals 측정
 
 미구현
