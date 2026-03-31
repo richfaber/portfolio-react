@@ -149,6 +149,22 @@ pnpm preview
 
 ---
 
+## 모바일 디버깅 (vConsole)
+
+개발 환경에서만 화면에 콘솔/네트워크 패널을 띄워줍니다. 모바일에서 개발자 도구 없이 디버깅할 때 유용합니다.
+
+```ts
+// main.tsx
+if (import.meta.env.DEV) {
+  const { default: VConsole } = await import('vconsole')
+  new VConsole()
+}
+```
+
+화면 우측 하단 버튼을 눌러 패널을 열 수 있습니다.
+
+---
+
 ## Web Vitals 측정
 
 미구현

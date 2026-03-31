@@ -114,6 +114,7 @@ src/
 - [X] 이미지 최적화
 - [X] Memoization
 - [X] 번들 분석기 visualizer
+- [X] 모바일 디버깅 vConsole
 
 ### 기타
 
