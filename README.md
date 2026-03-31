@@ -85,7 +85,6 @@ src/
 - [X] 에러 바운더리
 - [X] i18n 다국어 처리 (Context)
 - [X] i18n 다국어 처리 (react-i18next)
-- [ ] 커스텀 훅 (`useFetch`, `useDebounce`, `useLocalStorage`)
 - [X] 날짜/시간 포맷 유틸
 
 ### 컴포넌트
@@ -97,7 +96,6 @@ src/
 - [ ] Infinite Scroll
 - [ ] Skeleton Loading
 - [ ] Drag & Drop
-- [ ] Form (유효성 검사 포함)
 - [ ] 다크모드 토글
 
 ### 상태관리
@@ -110,9 +108,14 @@ src/
 
 - [X] React Query / TanStack Query
 
-### 성능 최적화
+### 개발환경설정
 
-- [ ] Code Splitting / Lazy Loading
-- [ ] 이미지 최적화
-- [ ] Memoization
+- [X] Code Splitting / Lazy Loading
+- [X] 이미지 최적화
+- [X] Memoization
 - [ ] Web Vitals 측정
+
+### 기타
+
+- [ ] 리액트훅 폼
+- [ ] Zod

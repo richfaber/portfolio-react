@@ -32,6 +32,19 @@ import Button from '@/component/Button'
 
 ---
 
+## Code Splitting / Lazy Loading
+
+라우터에서 모든 페이지를 `lazy()` 로 import하면 빌드 시 페이지별로 JS가 자동 분리됩니다.
+첫 접속 시 전체 JS를 다운로드하지 않고, 해당 페이지 진입 시점에 로드합니다.
+
+```ts
+// router/index.tsx
+const Home = lazy(() => import('@/page/home/Home'))
+const Login = lazy(() => import('@/page/auth/Login'))
+```
+
+---
+
 ## 빌드 번들 분리
 
 라우트별 lazy import로 JS/CSS가 자동 분리되며, 라이브러리는 `manualChunks`로 별도 청크로 묶음:
@@ -89,6 +102,30 @@ src/resource/style/vendor/sassy-cubic-bezier
 | jpg/jpeg/png/webp | quality 80 |
 | gif | optimizationLevel 3 |
 | svg | preset-default (cleanupIds 제외) |
+
+---
+
+## Memoization
+
+React Compiler (`babel-plugin-react-compiler`) 가 빌드 시 자동으로 memoization 처리합니다.
+`useMemo`, `useCallback` 을 수동으로 작성하지 않아도 됩니다.
+
+```ts
+// vite.config.ts
+import react, { reactCompilerPreset } from '@vitejs/plugin-react'
+import babel from '@rolldown/plugin-babel'
+
+plugins: [
+  react(),
+  babel({ presets: [reactCompilerPreset()] }),
+]
+```
+
+---
+
+## Web Vitals 측정
+
+미구현
 
 ---
 
